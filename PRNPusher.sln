@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRNPusher", "PRNPusher.csproj", "{360FF558-3952-4B90-ABE2-3C4C52367150}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{360FF558-3952-4B90-ABE2-3C4C52367150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360FF558-3952-4B90-ABE2-3C4C52367150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360FF558-3952-4B90-ABE2-3C4C52367150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360FF558-3952-4B90-ABE2-3C4C52367150}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D4CDC0C-9293-415E-8EFA-C444DC0C35CD}
+	EndGlobalSection
+EndGlobal
