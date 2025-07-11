@@ -65,7 +65,7 @@ namespace PRNPusher
             using (var dialog = new FolderBrowserDialog())
             {
                 dialog.Description = "Select a folder";
-                dialog.ShowNewFolderButton = true;
+                dialog.ShowNewFolderButton = false;
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     FolderPathTextBox.Text = dialog.SelectedPath;

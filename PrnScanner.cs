@@ -16,6 +16,7 @@ namespace PRNPusher
     {
         private DispatcherTimer _scanTimer;
         private static readonly HttpClient httpClient = new HttpClient();
+        private DateTime _lastScanTime = DateTime.MinValue;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
@@ -163,6 +164,7 @@ namespace PRNPusher
                         //System.Diagnostics.Debug.WriteLine($"Processing PRN file: {prnFile}");
                         ReadPrnFile(prnFile);
                     }
+                    _lastScanTime = DateTime.Now;
                 }
                 catch (Exception ex)
                 {
@@ -202,7 +204,13 @@ namespace PRNPusher
                 var filename = Path.GetFileName(filePath);
                 if (FileCompletionStatus.ContainsKey(filename))
                 {
-                    if (FileCompletionStatus[filename] <= 0)
+                    // Check last modified time and update FileCompletionStatus if needed
+                    var lastModified = File.GetLastWriteTime(filePath);
+                    if (lastModified > _lastScanTime)
+                    {
+                        FileCompletionStatus[filename] = 1;
+                    }
+                    else if (FileCompletionStatus[filename] <= 0)
                     {
                         return; // Skip if already processed    
                     }
