@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Folder Path:" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="FolderPathTextBox" Grid.Column="1" Margin="0,0,5,0" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding FolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="FolderPathTextBox" Grid.Column="1" Margin="0,0,5,0" IsReadOnly="False" VerticalAlignment="Center" Text="{Binding FolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Content="Browse..." Grid.Column="2" Click="BrowseButton_Click" VerticalAlignment="Center" Margin="0,0,5,0"/>
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
                     <Button Content="Start" Click="StartScanner_Click" Margin="0,0,5,0" Width="60" IsEnabled="{Binding Running, Converter={StaticResource InverseBoolConverter}}"/>

@@ -225,34 +225,15 @@ namespace PRNPusher
                 var lines = File.ReadAllLines(filePath);
                 if (lines.Length < 2)
                     return; // No data
-                var headers = lines[0].Split('\t');
-                var headersInfluxFormat = lines[0]
-                    .Replace(" ", "\\ ")
-                    .Replace(",", "\\,")
-                    .Replace("=", "\\=")
-                    .Split('\t');
-
-                // Ensure DataFields contains all headers as keys, excluding the first 3
-                var newFieldFound = false;
-                for (int h = 3; h < headers.Length; h++)
-                {
-                    if (!(DataFields.ContainsKey(headers[h]) || string.IsNullOrWhiteSpace(headers[h])))
-                    {
-                        DataFields[headers[h]] = false;
-                        newFieldFound = true;
-                    }
-                }
-                if (newFieldFound)
-                {
-                    OnPropertyChanged(nameof(DataFields));
-                }
+                
+                var (headers, headersInfluxFormat) = GetHeaders(lines[0]);
                 
                 // go over each data line in the file
                 for (int i = 1; i < lines.Length; i++)
                 {
                     var values = lines[i].Split('\t');
                     if (values.Length < 4) continue; // Not enough data
-
+                    if (values[1] == "Date") (headers, headersInfluxFormat) = GetHeaders(lines[i]);
                     string date = values[1];
                     string time = values[2];
                     string timestamp = GetInfluxTimestamp(date, time);
@@ -384,6 +365,34 @@ namespace PRNPusher
                 Messages.RemoveAt(0);
             }
             OnPropertyChanged(nameof(Messages));
+        }
+
+        private (string[] headers, string[] headersInfluxFormat) GetHeaders(string line)
+        {
+            var headers = line.Trim().Split('\t');
+            var headersInfluxFormat = line
+                .Trim()
+                .Replace(" ", "\\ ")
+                .Replace(",", "\\,")
+                .Replace("=", "\\=")
+                .Split('\t');
+
+            // Ensure DataFields contains all headers as keys, excluding the first 3
+            var newFieldFound = false;
+            for (int h = 3; h < headers.Length; h++)
+            {
+                if (!(DataFields.ContainsKey(headers[h]) || string.IsNullOrWhiteSpace(headers[h])))
+                {
+                    DataFields[headers[h]] = false;
+                    newFieldFound = true;
+                }
+            }
+            if (newFieldFound)
+            {
+                OnPropertyChanged(nameof(DataFields));
+            }
+
+            return (headers, headersInfluxFormat);
         }
 
     }

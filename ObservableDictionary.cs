@@ -24,7 +24,7 @@ namespace PRNPusher
         {
             if (TryGetValue(key, out TValue value) && base.Remove(key))
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value), getindex(key)));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value), Getindex(key)));
                 OnPropertyChanged("Count");
                 OnPropertyChanged("Keys");
                 OnPropertyChanged("Values");
@@ -46,7 +46,7 @@ namespace PRNPusher
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
                         new KeyValuePair<TKey, TValue>(key, value),
                         new KeyValuePair<TKey, TValue>(key, oldValue),
-                        getindex(key)));
+                        Getindex(key)));
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace PRNPusher
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private int getindex(TKey key)
+        private int Getindex(TKey key)
         {
             int index = 0;
             foreach (var k in Keys)
